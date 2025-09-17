@@ -1,5 +1,5 @@
-﻿using Application.Services;
-using Core.Entities;
+﻿using Application.DTOs;
+using Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -26,17 +26,16 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Product product)
+        public IActionResult Create(ProductDto productDto)
         {
-            _service.CreateProduct(product);
-            return Ok(product);
+            _service.CreateProduct(productDto);
+            return Ok(productDto);
         }
 
-        [HttpPut("{id}")]
-        public IActionResult Update(int id, Product product)
+        [HttpPut]
+        public IActionResult Update(ProductDto productDto)
         {
-            if (id != product.Id) return BadRequest();
-            _service.UpdateProduct(product);
+            _service.UpdateProduct(productDto);
             return NoContent();
         }
 

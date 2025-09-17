@@ -1,5 +1,5 @@
-﻿using Application.Services;
-using Core.Entities;
+﻿using Application.DTOs;
+using Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -26,17 +26,16 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Category category)
+        public IActionResult Create(CategoryDto categoryDto)
         {
-            _service.CreateCategory(category);
-            return Ok(category);
+            _service.CreateCategory(categoryDto);
+            return Ok(categoryDto);
         }
 
-        [HttpPut("{id}")]
-        public IActionResult Update(int id, Category category)
+        [HttpPut]
+        public IActionResult Update(CategoryDto categoryDto)
         {
-            if (id != category.Id) return BadRequest();
-            _service.UpdateCategory(category);
+            _service.UpdateCategory(categoryDto);
             return NoContent();
         }
 
