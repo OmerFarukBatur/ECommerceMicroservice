@@ -1,5 +1,8 @@
 using Application.Services;
+using Application.Validators;
 using Core.Interfaces;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -31,6 +34,12 @@ builder.Services.AddScoped<ProductService>();
 
 
 builder.Services.AddControllers();
+
+// FluentValidation Configuration
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddValidatorsFromAssemblyContaining<ProductValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<CategoryValidator>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
