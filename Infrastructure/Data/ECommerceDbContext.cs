@@ -35,12 +35,21 @@ namespace Infrastructure.Data
                       .OnDelete(DeleteBehavior.Cascade);
             });
 
-            
 
-            modelBuilder.Entity<Category>()
-                        .HasMany(c => c.Products)
-                        .WithOne(p => p.Category)
-                        .HasForeignKey(p => p.CategoryId);
+            // Category Example Data
+            modelBuilder.Entity<Category>().HasData(
+                new Category { Id = 1, Name = "Taşıt" },
+                new Category { Id = 2, Name = "Konut" },
+                new Category { Id = 3, Name = "Gıda" }
+            );
+
+            // Product Example Data
+            modelBuilder.Entity<Product>().HasData(
+                new Product { Id = 1, Name = "Binek Araç", Price = 1000000, Stock = 5, CategoryId = 1 },
+                new Product { Id = 2, Name = "Ticari Araç", Price = 1500000, Stock = 3, CategoryId = 1 },
+                new Product { Id = 3, Name = "3+1 Daire", Price = 3500000, Stock = 1, CategoryId = 2 },
+                new Product { Id = 4, Name = "Un", Price = 1000, Stock = 100, CategoryId = 3 }
+            );
         }
     }
 }
